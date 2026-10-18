@@ -1,6 +1,6 @@
 # House of Ketty
 
-The website for **houseofketty.store**: a store, the story behind the brand,
+The website at **https://ksommaketarin-droid.github.io/sk-official/**: a store, the story behind the brand,
 and contact details, in English, Thai (`/th/`) and Hindi (`/hi/`).
 
 Customers choose a product and a design, then send the order on WhatsApp. They
@@ -126,40 +126,12 @@ build:
 ## Deploying
 
 `.github/workflows/deploy.yml` runs on every push and pull request. It runs
-`npm audit`, the tests, the build and the browser checks. On `main` it also:
+`npm audit`, the tests, the build and the browser checks. On `main` it also
+publishes the site to **GitHub Pages** at
+https://ksommaketarin-droid.github.io/sk-official/ (Settings → Pages →
+Source: GitHub Actions).
 
-1. **GitHub Pages**, which serves https://houseofketty.store. DNS at Hostinger
-   has four `A @` records (185.199.108.153, .109, .110, .111) and
-   `CNAME www → ksommaketarin-droid.github.io`, and the domain is set in
-   GitHub → Settings → Pages → Custom domain with **Enforce HTTPS** on.
-   GitHub Pages ignores `.htaccess`, so there the CSP and referrer policy
-   come from each page's `<meta>` tags. The other headers apply only on
-   Hostinger hosting.
-2. **Hostinger production** at https://houseofketty.store, once switched on.
-
-### Switch on automatic deploys to Hostinger
-
-1. In hPanel → **Files → FTP Accounts**, note the FTP host, username and
-   password (or create an FTP account limited to `public_html`).
-2. In GitHub → Settings → Secrets and variables → Actions:
-   - **Secrets**: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`
-   - **Variables**: `HOSTINGER_DEPLOY` = `true` (and optionally `UPI_ID`,
-     and `HOSTINGER_DIR` if the site is not in `./public_html/`)
-3. Re-run the workflow, or push to `main`.
-
-The upload uses FTPS with certificate checking. If it fails with a TLS error,
-set `FTP_SERVER` to the exact hostname hPanel shows for FTP.
-
-In hPanel, also check that **SSL** is active for houseofketty.store, and that
-the domain points at this hosting plan.
-
-### Deploy by hand
-
-```bash
-npm ci && npm run build
-```
-
-Then upload the **contents** of `dist/` into `public_html/` with hPanel's File
-Manager. Include the hidden `.htaccess` and `.well-known/`.
+GitHub Pages ignores `.htaccess`, so there the CSP and referrer policy come
+from each page's `<meta>` tags.
 
 Old links (`/ep01.html` … `/ep08.html`) redirect to the new story pages.

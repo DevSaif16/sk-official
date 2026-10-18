@@ -77,7 +77,7 @@ test('every internal link and asset resolves; external links are WhatsApp, tel o
   for (const { file, html } of pages) {
     for (const [, url] of all(html, /(?:href|src)="([^"]+)"/g)) {
       if (/^https:\/\/wa\.me\/\d+/.test(url) || /^tel:\+\d+$/.test(url) || url.startsWith('upi://') || url.startsWith('#')) continue;
-      if (url.startsWith('https://houseofketty.store/')) continue; // canonical + hreflang
+      if (url.startsWith('https://ksommaketarin-droid.github.io/sk-official/')) continue; // canonical + hreflang
       if (/^[a-z]+:/i.test(url)) {
         missing.push(`${file} → unexpected external ${url}`);
         continue;
